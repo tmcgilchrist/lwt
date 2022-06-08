@@ -118,6 +118,10 @@ jobs:
       - run: opam install lwt_ppx --deps-only --with-test
         if: ${{ matrix.ppx == true }}
 
+      - name: Hack to reactivate lwt_domain which is removed otherwise. Remove step once https://github.com/ocurrent/ocaml-ci/pull/468 is on
+        run: mv lwt_domain.opam.temporarily-deactivated lwt_domain.opam
+        if: ${{ matrix.domain == true }}
+
       - run: opam install lwt_domain --deps-only --with-test
         if: ${{ matrix.domain == true }}
 
